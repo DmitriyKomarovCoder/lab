@@ -8,7 +8,7 @@ void Generation_Block_File(const char* path_file, int n, int *key) {  //  Ген
     std::ofstream f;
     f.open(path_file);
     for (int i=0; i < n; i++) {
-        x = FIRST_ASCII_CHAR + rand() % LAST_ASCII_CHAR;
+        x = rand() % LAST_ASCII_CHAR;
         key[i] = x;
         sim = (char)x;
         f << sim;
@@ -29,7 +29,7 @@ void Generation_Coding_File(const char* path_file, const char* path_file_coding,
     key_file.open(path_file_key);
     while (f.get(s)) {  //  Кодирование сообщения
         x = (int) s;
-        simvol = ((x + key[k % 30]) % 128);
+        simvol = ((x + key[k % 30]) % 256);
         coding_file << (char)simvol;
         k ++;
     }
@@ -42,6 +42,7 @@ void Generation_Coding_File(const char* path_file, const char* path_file_coding,
 }
 
 void Decoding_File(const char* path_file_coding, const char* path_file_key) {  //  декодинг файла
+    setlocale(LC_ALL, "ru");
     std::ifstream key_file;
     std::ifstream coding_file;
     int key[30];
@@ -56,7 +57,7 @@ void Decoding_File(const char* path_file_coding, const char* path_file_key) {  /
     k = 0;
     while (coding_file.get(s)) {  //  Декодинг файла
         x = ((int) s);
-        x = ((x + 128 - key[k % 30] % 128) % 128);
+        x = ((x + 256 - key[k % 30] % 256) % 256);
         std::cout<<((char)x);
         k ++;
     }

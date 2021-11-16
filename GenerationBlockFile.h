@@ -1,7 +1,6 @@
 #ifndef PROJECT_GENERATIONBLOCKFILE_H_
 #define PROJECT_GENERATIONBLOCKFILE_H_
-#define FIRST_ASCII_CHAR 0
-#define LAST_ASCII_CHAR 128
+#define LAST_ASCII_CHAR 256
 #include <math.h>
 #include <stdio.h>
 #include <cstdio>
